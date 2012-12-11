@@ -3,7 +3,7 @@ project(Schizophrenia)
 INCLUDE_DIRECTORIES("src/")
 SET(EXECUTABLE_OUTPUT_PATH "./bin/")
 SET(LIBRARY_OUTPUT_PATH "./lib/")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x -pthread -Wall -pedantic -O3 -Werror")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x -pthread -Wall -Wextra -Wno-unused-parameter -pedantic -O3 -Werror")
 
 add_library(schizophrenia SHARED "src/character/Character.cpp" "src/character/Attribute.cpp" "src/character/BasicTrait.cpp")
 add_library(schizophrenia-wod SHARED "src/character/wod/WorldOfDarknessCharacter.cpp" "src/character/wod/checks/PowerStatCheck.cpp")
