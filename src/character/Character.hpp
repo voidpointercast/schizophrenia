@@ -107,6 +107,9 @@ namespace schizohrenia {
 	}
 
 
+	inline YAML::Emitter& operator<<(YAML::Emitter& out, const Character& character) {
+		return character.operator<<(out);
+	}
 
 
 }
