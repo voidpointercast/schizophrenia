@@ -37,6 +37,8 @@ namespace schizohrenia {
 			virtual std::tuple<bool,std::string> removeTrait(const BasicTrait& trait);
 			virtual std::tuple<bool,std::string> removeAttribute(const BasicTrait&, const Attribute& attribute);
 
+				
+
 			const std::vector<std::shared_ptr<Check<Character>>>& getChecks(void) const;
 
 			std::string getUUID(void) const;
@@ -109,6 +111,10 @@ namespace schizohrenia {
 
 	inline YAML::Emitter& operator<<(YAML::Emitter& out, const Character& character) {
 		return character.operator<<(out);
+	}
+
+	inline YAML::Iterator operator>>(YAML::Iterator in, Character& character) {
+		return character.operator>>(in);
 	}
 
 
