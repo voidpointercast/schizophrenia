@@ -25,5 +25,29 @@ int main(void) {
 	bool attrTestResult		= yaml.find(expectedAttrString) != std::string::npos;
 	bool headerTestResult	= yaml.at(0) == '-' && yaml.length() >= 175;
 	endTest(attrTestResult && headerTestResult);
+	beginTest("YAML to Character test");
+	std::stringstream stream{yaml};
+	YAML::Parser parser;
+	YAML::Node	 node;
+	parser.Load(stream);
+	bool validDocument 	= static_cast<bool>(parser);
+	bool fetchableDoc		= parser.GetNextDocument(node);
+	if(validDocument && fetchableDoc) {
+		YAML::Emitter outCopy;
+		Character copy;
+		node.begin() >> copy;
+		outCopy << copy;
+		endTest(outCopy.c_str() == yaml,"Character and copy do not match");
+	} else {
+		if(!validDocument) {
+			endTest(false,"Invalid document format");
+		} else {
+			endTest(false,"Invalid document");
+		}
+	}
+
+	
+	
+	
 	return 0;
 }
