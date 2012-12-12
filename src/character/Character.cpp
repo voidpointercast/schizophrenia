@@ -161,11 +161,23 @@ namespace schizohrenia {
 	}
 
 	YAML::Iterator Character::operator>>(YAML::Iterator in) {
-		
-		
+		std::string id;
+		(*in++) >> id;
+		const YAML::Node* traits = in->FindValue("BasicTraits");
+		if(!traits) {
+			throw std::runtime_error("Could not read character from yaml data, <BasicTraits> key seems to be missing");
+		}
+		auto uuid = YAML::DecodeBase64(id.c_str());
+		std::fill(this->data,this->data+16,static_cast<uint8_t>(0));
+		std::copy_n(uuid.begin(),16,static_cast<unsigned char*>(this->data));
+		this->CharacterTraits.clear();
+		for(auto it = traits->begin(); it != traits->end(); ++it) {
+			BasicTrait buffer;
+			it >> buffer;
+			this->CharacterTraits.push_back(buffer);
+		}
 		return in;
 	}
-
 
 
 	std::ostream& Character::serialize(std::ostream& out, const SupportedSerialization type) {
