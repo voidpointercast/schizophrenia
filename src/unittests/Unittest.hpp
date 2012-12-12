@@ -21,7 +21,13 @@ namespace unittest {
 	}
 
 	bool endTest(bool result, const std::string reason) {
-		std::cout << (result ? "[\033[1;32mPassed\033[0m]" : "[\033[1;31mFailed\033[0m]") << " <" << reason << ">" << std::endl;
+		std::cout << (result ? "[\033[1;32mPassed\033[0m]" : "[\033[1;31mFailed\033[0m]");
+		if(!result) {
+			std::cout << " <" << reason << ">" << std::endl;
+		} else {
+			std::cout << std::endl;
+		}
+
 		return result;
 	}
 }
