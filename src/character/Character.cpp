@@ -154,7 +154,7 @@ namespace schizohrenia {
 	}
 
 	YAML::Emitter& Character::operator<<(YAML::Emitter& out) const {
-			out << YAML::BeginDoc << YAML::BeginSeq << YAML::Binary(this->data,sizeof(uint16_t)*16);
+			out << YAML::BeginDoc << YAML::BeginSeq << YAML::Binary(this->data,sizeof(uint8_t)*16);
 			out << YAML::BeginMap << YAML::Key << "BasicTraits" << YAML::Value << this->CharacterTraits;
 			out << YAML::EndMap << YAML::EndSeq << YAML::EndDoc;
 			return out;
