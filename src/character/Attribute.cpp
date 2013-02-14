@@ -28,17 +28,27 @@ namespace schizohrenia {
 		return this->Name == right.Name;
 	}
 
+	const std::string& Attribute::getCategory(void) const {
+		return this->Category;
+	}
+
+
 	YAML::Emitter& Attribute::operator<<(YAML::Emitter& out) const {
 		out << YAML::BeginMap;
 		out << YAML::Key << "name" << YAML::Value << this->Name;
 		out << YAML::Key << "value" << YAML::Value << this->Value;
+		out << YAML::Key << "category" << YAML::Value << this->Category;
 		out << YAML::EndMap;
+		out << YAML::BeginSeq;
+		std::for_each(this->Keywords.begin(), this->Keywords.end(), [&](const std::string& key) -> void { out << key; });
+		out << YAML::EndSeq;
 		return out;
 	}
 
 	YAML::Iterator Attribute::operator>>(YAML::Iterator in) {
 		*in->FindValue("name")  >> this->Name;
 		*in->FindValue("value") >> this->Value;
+		*in->FindValue("category") >> this->Category;
 		return in++;
 	}
 

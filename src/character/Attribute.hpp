@@ -8,6 +8,7 @@
 #ifndef ATTRIBUTE_HPP_
 #define ATTRIBUTE_HPP_
 
+#include<vector>
 #include<boost/lexical_cast.hpp>
 #include<yaml-cpp/yaml.h>
 
@@ -31,6 +32,8 @@ namespace schizohrenia {
 			template<typename ReturnType=std::string>
 			ReturnType getValue(void) const;
 
+			const std::string& getCategory(void) const;
+
 			template<typename InputType=std::string>
 			void setValue(const InputType& value);
 
@@ -41,6 +44,8 @@ namespace schizohrenia {
 
 		protected:
 			std::string Value;
+			std::string Category;
+			std::vector<std::string> Keywords;
 
 };
 
@@ -58,11 +63,13 @@ namespace schizohrenia {
 	void Attribute::serialize(Archive& archive, const unsigned int version) {
 		archive & this->Name;
 		archive & this->Value;
+		archive & this->Category;
+		archive & this->Keywords;
 	}
 
 
 	inline YAML::Emitter& operator<<(YAML::Emitter& out, const Attribute& attribute) {
-		return attribute.operator <<(out);
+		return attribute.operator<<(out);
 	}
 
 	inline YAML::Iterator operator>>(YAML::Iterator in, Attribute& attribute) {
