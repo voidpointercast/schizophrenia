@@ -5,7 +5,12 @@
 namespace schizohrenia {
 
 	BasicTrait::BasicTrait(const std::string& name, const std::string& value)
-	: Value(value), Attributes(size_t(0)), Name(name)  {
+	: Value(value), Attributes(size_t(0)), Name(name), ID(name)  {
+
+	}
+	
+	BasicTrait::BasicTrait(const std::string& id, const std::string& name, const std::string& value)
+	: Value(value), Attributes(size_t(0)), Name(name), ID(id)  {
 
 	}
 
@@ -19,11 +24,11 @@ namespace schizohrenia {
 
 
 	bool BasicTrait::operator==(const BasicTrait& right) const{
-		return this->Name == right.Name && this->Attributes == right.Attributes;
+		return this->ID == right.ID && this->Attributes == right.Attributes;
 	}
 
 	bool BasicTrait::operator==(const std::string& right) const{
-			return this->Name == right;
+			return this->ID == right;
 	}
 
 
@@ -35,6 +40,7 @@ namespace schizohrenia {
 
 	YAML::Emitter& BasicTrait::operator<<(YAML::Emitter& out) const {
 		out << YAML::BeginMap;
+		out << YAML::Key << "id" << YAML::Value << this->ID;
 		out << YAML::Key << "name" << YAML::Value << this->Name;
 		out << YAML::Key << "value"<< YAML::Value << this->Value;
 		out << YAML::Key << "attributes" << YAML::Value << this->Attributes;
@@ -43,6 +49,7 @@ namespace schizohrenia {
 	}
 
 	YAML::Iterator BasicTrait::operator>>(YAML::Iterator in) {
+		*in->FindValue("id")    >> this->ID;
 		*in->FindValue("name")	>> this->Name;
 		*in->FindValue("value") >> this->Value;
 		const YAML::Node* attributes = in->FindValue("attributes");
