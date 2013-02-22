@@ -37,6 +37,12 @@ namespace schizohrenia {
 		auto end   = this->Attributes.end();
 		return std::find_if(begin,end,[&attribute](const Attribute& attr)->bool {return attr.Name == attribute;}) != this->Attributes.end();
 	}
+	
+	bool BasicTrait::hasAttribute(const Attribute& attribute) const {
+		auto begin = this->Attributes.begin();
+		auto end   = this->Attributes.end();
+		return std::find(begin,end,attribute) != this->Attributes.end();
+	}
 
 	YAML::Emitter& BasicTrait::operator<<(YAML::Emitter& out) const {
 		out << YAML::BeginMap;
