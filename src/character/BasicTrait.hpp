@@ -21,8 +21,11 @@ namespace schizohrenia {
 	struct BasicTrait {
 	public:
 		BasicTrait(const std::string& name, const std::string& value);
+		BasicTrait(const std::string& id, const std::string& name, const std::string& value);
 		template<class InputIterator>
 		BasicTrait(const std::string& name, const std::string& value, InputIterator begin, InputIterator end);
+		template<class InputIterator>
+		BasicTrait(const std::string& id, const std::string& name, const std::string& value, InputIterator begin, InputIterator end);
 		BasicTrait(const BasicTrait& copy) = default;
 		BasicTrait(void) = default;
 		virtual ~BasicTrait() throw();
@@ -43,12 +46,14 @@ namespace schizohrenia {
 		void save(std::ostream& out) const;
 
 		std::string					Value;
-		std::vector<Attribute>	 	Attributes;
+		std::vector<Attribute>	Attributes;
 		std::string 				Name;
+		std::string					ID;
 	};
 
 	template<class Archive>
 	void BasicTrait::serialize(Archive& archive, const unsigned int version) {
+		archive & this->ID;
 		archive & this->Name;
 		archive & this->Attributes;
 		archive & this->Value;
@@ -56,8 +61,13 @@ namespace schizohrenia {
 
 	template<class InputIterator>
 	BasicTrait::BasicTrait(const std::string& name, const std::string& value, InputIterator begin, InputIterator end)
-	: Name(name), Value(value), Attributes(begin,end) {
+	: ID(name), Name(name), Value(value), Attributes(begin,end) {
 
+	}
+	
+	template<class InputIterator>
+	BasicTrait::BasicTrait(const std::string& id, const std::string& name, const std::string& value, InputIterator begin, InputIterator end)
+	: ID(id), Name(name), Value(value), Attributes(begin,end) {
 	}
 
 	template<class ReturnType>
