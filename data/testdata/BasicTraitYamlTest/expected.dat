@@ -1,0 +1,14 @@
+id: TraitName
+name: TraitName
+value: Value
+attributes:
+  - name: A1
+    value: V
+    category: ""
+    keywords:
+      []
+  - name: A2
+    value: V
+    category: ""
+    keywords:
+      []

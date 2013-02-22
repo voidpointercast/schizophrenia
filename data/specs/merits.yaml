@@ -1,0 +1,13 @@
+name: <NAME>
+type: <PHYSICAL|MENTAL|SOCIAL|SUPERNATURAL>
+book: <BOOK>
+page: <PAGE>
+prequisites:
+ - {name: <PREQUISITE>, value: <VALUE>, type: <TYPE>}
+ - {name: <PREQUISITE>, value: <VALUE>, type: <TYPE>}
+values:
+ - { value: <VALUE>, description: <DESCRIPTION>}
+ - { value: <VALUE>, description: <DESCRIPTION>}
+keywords:
+ - <KEYWORD>
+ - <KEYWORD>
