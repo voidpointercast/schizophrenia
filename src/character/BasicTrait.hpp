@@ -33,7 +33,7 @@ namespace schizohrenia {
 		bool operator==(const BasicTrait& right) const;
 		bool operator==(const std::string& right) const;
 		bool hasAttribute(const std::string& attribute) const;
-
+		bool hasAttribute(const Attribute& attribute) const;
 		YAML::Emitter& operator<<(YAML::Emitter& out) const;
 		YAML::Iterator operator>>(YAML::Iterator in);
 
