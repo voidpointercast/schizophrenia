@@ -38,10 +38,11 @@ namespace schizohrenia {
 		out << YAML::Key << "name" << YAML::Value << this->Name;
 		out << YAML::Key << "value" << YAML::Value << this->Value;
 		out << YAML::Key << "category" << YAML::Value << this->Category;
-		out << YAML::EndMap;
+		out << YAML::Key << "keywords" << YAML::Value;
 		out << YAML::BeginSeq;
 		std::for_each(this->Keywords.begin(), this->Keywords.end(), [&](const std::string& key) -> void { out << key; });
 		out << YAML::EndSeq;
+		out << YAML::EndMap;
 		return out;
 	}
 
@@ -49,6 +50,7 @@ namespace schizohrenia {
 		*in->FindValue("name")  >> this->Name;
 		*in->FindValue("value") >> this->Value;
 		*in->FindValue("category") >> this->Category;
+		*in->FindValue("keywords") >> this->Keywords;
 		return in++;
 	}
 
