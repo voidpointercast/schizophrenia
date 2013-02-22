@@ -7,21 +7,31 @@
 
 #include<iostream>
 #include<sstream>
+#include<fstream>
 #include<character/BasicTrait.hpp>
 #include<unittests/Unittest.hpp>
 using namespace schizohrenia;
 using namespace unittest;
 
+const std::string expectedDataFile = "./data/testdata/BasicTraitYamlTest/expected.dat";
+
 int main(void) {
 	{
 		beginTest("BasicTrait to YAML translation test");
-		std::string expectedResult {"name: TraitName\nvalue: Value\nattributes:\n  - name: A1\n    value: V\n  - name: A2\n    value: V"};
+		std::ifstream expectedFile{expectedDataFile.c_str()};
+		if(! expectedFile) {
+			endTest(false, "Cannot open expected.dat");
+			return 1;
+		}
+		std::stringstream buffer;
+		buffer << expectedFile.rdbuf();
+		std::string expectedResult = buffer.str();
 		BasicTrait trait{"TraitName","Value"};
 		trait.Attributes.push_back(Attribute{"A1","V"});
 		trait.Attributes.push_back(Attribute{"A2","V"});
 		YAML::Emitter out;
-		out << trait;
-		endTest(out.c_str() == expectedResult);
+		out <<  trait;
+		endTest(std::string(out.c_str())+"\n" == expectedResult);
 
 	}
 	{
