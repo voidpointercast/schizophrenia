@@ -28,7 +28,7 @@ namespace schizophrenia {
 		BasicTrait(const std::string& id, const std::string& name, const std::string& value, InputIterator begin, InputIterator end);
 		BasicTrait(const BasicTrait& copy) = default;
 		BasicTrait(void) = default;
-		virtual ~BasicTrait() throw();
+		virtual ~BasicTrait();
 		bool operator<(const BasicTrait& right) const;
 		bool operator==(const BasicTrait& right) const;
 		bool operator==(const std::string& right) const;
