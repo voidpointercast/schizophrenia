@@ -1,0 +1,14 @@
+id  : ID
+name: NAME
+type: TYPE
+book: BOOK
+page: PAGE
+prequisites:
+ - {name: PREQUISITEID1, value: VALUE1, category: prequisite}
+ - {name: PREQUISITEID2, value: VALUE2, category: prequisite}
+possibleValues:
+ - { value: 1, description: VALUE1DESCR}
+ - { value: 3, description: VALUE2DESCR}
+keywords:
+ - KEYWORD1
+ - KEYWORD2
