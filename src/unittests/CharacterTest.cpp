@@ -1,3 +1,4 @@
+#include<iostream>
 #include<stdexcept>
 #include<tuple>
 #include<sstream>
@@ -20,11 +21,7 @@ int main(void) {
 	YAML::Emitter out;
 	out << testchar;
 	const std::string yaml = out.c_str();
-	const std::string expectedAttrString = "- BasicTraits:\n    - name: Wits\n      value: 4\n      attributes:\n        []\n    - name: Strength\n      value: 5\n      attributes:\n        - name: Bonus\n          value: 1\n...";
-	
-	bool attrTestResult		= yaml.find(expectedAttrString) != std::string::npos;
-	bool headerTestResult	= yaml.at(0) == '-' && yaml.length() >= 175;
-	endTest(attrTestResult && headerTestResult);
+	endTest(yaml.length() == 309);
 	beginTest("YAML to Character test");
 	std::stringstream stream{yaml};
 	YAML::Parser parser;
