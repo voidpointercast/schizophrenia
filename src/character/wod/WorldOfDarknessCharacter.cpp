@@ -9,7 +9,7 @@
 #include "WorldOfDarknessCharacter.hpp"
 #include<character/wod/checks/PowerStatCheck.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 WorldOfDarknessCharacter::WorldOfDarknessCharacter(void)
 : Character("whitewolf.nwod.vampire"){

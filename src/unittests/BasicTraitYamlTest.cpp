@@ -10,7 +10,7 @@
 #include<fstream>
 #include<character/BasicTrait.hpp>
 #include<unittests/Unittest.hpp>
-using namespace schizohrenia;
+using namespace schizophrenia;
 using namespace unittest;
 
 const std::string expectedDataFile = "./data/testdata/BasicTraitYamlTest/expected.dat";

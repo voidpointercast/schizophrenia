@@ -16,7 +16,7 @@
 #include<character/BasicTrait.hpp>
 #include<character/Check.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 	class Character : public boost::uuids::uuid {
 		public:

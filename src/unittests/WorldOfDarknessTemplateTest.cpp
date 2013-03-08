@@ -2,7 +2,7 @@
 #include<tuple>
 #include<character/wod/WorldOfDarknessCharacter.hpp>
 #include<unittests/Unittest.hpp>
-using namespace schizohrenia;
+using namespace schizophrenia;
 using namespace unittest;
 
 int main(void) {

@@ -11,10 +11,10 @@
 #include<character/Check.hpp>
 #include<character/Character.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 
-class PowerStatCheck: public schizohrenia::Check<Character> {
+class PowerStatCheck: public schizophrenia::Check<Character> {
 public:
 	PowerStatCheck(const Character& character);
 	virtual ~PowerStatCheck();

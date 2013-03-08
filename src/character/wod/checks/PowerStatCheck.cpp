@@ -7,7 +7,7 @@
 
 #include<character/wod/checks/PowerStatCheck.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 PowerStatCheck::PowerStatCheck(const Character& character)
 : Check(character) {

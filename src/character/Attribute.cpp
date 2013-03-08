@@ -7,7 +7,7 @@
 
 #include "Attribute.hpp"
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 	Attribute::Attribute(const std::string& name, const std::string& value)
 	: Name(name),

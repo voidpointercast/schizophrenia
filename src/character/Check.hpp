@@ -12,7 +12,7 @@
 #include<character/BasicTrait.hpp>
 #include<character/Attribute.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 
 	template<class Character>

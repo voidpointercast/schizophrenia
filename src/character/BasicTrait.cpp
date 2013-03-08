@@ -2,7 +2,7 @@
 
 
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 	BasicTrait::BasicTrait(const std::string& name, const std::string& value)
 	: Value(value), Attributes(size_t(0)), Name(name), ID(name)  {

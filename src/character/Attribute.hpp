@@ -12,7 +12,7 @@
 #include<boost/lexical_cast.hpp>
 #include<yaml-cpp/yaml.h>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 	class Attribute {
 		public:

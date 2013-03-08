@@ -16,7 +16,7 @@
 #include<yaml-cpp/yaml.h>
 #include<character/Attribute.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 	struct BasicTrait {
 	public:

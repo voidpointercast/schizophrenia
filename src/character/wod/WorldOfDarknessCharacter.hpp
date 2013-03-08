@@ -10,9 +10,9 @@
 
 #include<character/Character.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
-	class WorldOfDarknessCharacter: public schizohrenia::Character {
+	class WorldOfDarknessCharacter: public schizophrenia::Character {
 	public:
 		WorldOfDarknessCharacter(void);
 		virtual ~WorldOfDarknessCharacter();

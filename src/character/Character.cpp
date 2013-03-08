@@ -11,7 +11,7 @@
 #include<iterator>
 #include<character/Character.hpp>
 
-namespace schizohrenia {
+namespace schizophrenia {
 
 	Character::Character(void)
 	: boost::uuids::uuid(boost::uuids::random_generator()()),
