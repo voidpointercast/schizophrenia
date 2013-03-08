@@ -14,7 +14,7 @@ namespace schizophrenia {
 
 	}
 
-	BasicTrait::~BasicTrait(void) throw() {
+	BasicTrait::~BasicTrait(void) {
 
 }
 
