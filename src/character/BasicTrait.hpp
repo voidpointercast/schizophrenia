@@ -1,10 +1,3 @@
-/*
- * BasicTrait.hpp
- *
- *  Created on: Nov 11, 2012
- *      Author: voidpointercast
- */
-
 #ifndef BASICTRAIT_HPP_
 #define BASICTRAIT_HPP_
 #include<vector>
