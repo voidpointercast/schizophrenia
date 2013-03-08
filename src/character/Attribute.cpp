@@ -14,6 +14,14 @@ namespace schizophrenia {
 	  Value(value) {
 
 	}
+	
+        Attribute::Attribute (const YAML::Node& node) {
+              node["name"] >> this->Name;
+              node["value"] >> this->Value;
+              node["category"] >> this->Category;
+        }
+
+
 
 
 	Attribute::~Attribute() {
