@@ -17,6 +17,8 @@ namespace schizophrenia {
 	class Attribute {
 		public:
 			Attribute(const std::string& name, const std::string& value);
+			Attribute(const std::string& name, const std::string& value, const std::string& category);
+			Attribute(const YAML::Node&);
 			Attribute(void) = default;
 			Attribute(const Attribute& copy) = default;
 			virtual ~Attribute();
