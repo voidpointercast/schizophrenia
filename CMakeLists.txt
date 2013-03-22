@@ -20,3 +20,4 @@ target_link_libraries(WODTemplateTest yaml-cpp schizophrenia-wod)
 target_link_libraries(BasicTraitYamlTest yaml-cpp schizophrenia)
 target_link_libraries(CharacterTest yaml-cpp schizophrenia)
 target_link_libraries(MeritTest yaml-cpp schizophrenia-wod)
+

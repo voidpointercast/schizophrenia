@@ -3,12 +3,12 @@ name: <NAME>
 type: <PHYSICAL|MENTAL|SOCIAL|SUPERNATURAL>
 book: <BOOK>
 page: <PAGE>
-prequisites:
+attributes:
  - {name: <PREQUISITEID>, value: <VALUE>, category: prequisite}
  - {name: <PREQUISITEID>, value: <VALUE>, category: prequisite}
 values:
- - { value: <VALUE>, description: <DESCRIPTION>}
- - { value: <VALUE>, description: <DESCRIPTION>}
+ - { value: 1, description: <DESCRIPTION>}
+ - { value: 2, description: <DESCRIPTION>}
 keywords:
  - <KEYWORD>
  - <KEYWORD>
