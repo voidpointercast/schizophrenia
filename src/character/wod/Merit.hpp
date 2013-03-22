@@ -13,7 +13,6 @@ class Merit : public BasicTrait {
 	typedef typename std::vector<std::tuple<ValueType,std::string>>::const_iterator PossibleValueIterator;
 	
         static Merit createMerit ( const IDType& id, ValueType value, const std::string& description = "" );
-        static size_t loadFromFile ( const std::string& filename );
 	
 	Merit(void) = default;
 
@@ -21,7 +20,9 @@ class Merit : public BasicTrait {
         PrequisiteIterator endPrequisites ( void ) const;
 	PossibleValueIterator beginValues(void) const;
 	PossibleValueIterator endValues(void) const;
-	
+
+        YAML::Node encode(void) const;
+        bool decode(const YAML::Node& node);
 
         bool operator== ( const Merit& right ) const;
 
@@ -40,13 +41,21 @@ class Merit : public BasicTrait {
         static std::vector<Merit> Prototypes;
 	std::vector<std::string> Keywords;
 	std::vector<std::tuple<ValueType, std::string>> PossibleValues;
-
-
-
-
-
-
     };
 
 }
+
+namespace YAML {
+template<>
+struct convert<schizophrenia::Merit> {
+    static Node encode ( const schizophrenia::Merit& merit ) {
+        return merit.encode();
+        }
+
+    static bool decode ( const Node& node, schizophrenia::Merit& merit ) {
+        return merit.decode ( node );
+        }
+    };
+}
+
 #endif
