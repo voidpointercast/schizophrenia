@@ -155,6 +155,7 @@ std::tuple<bool,std::string> Character::removeAttribute ( const BasicTrait& trai
 
 YAML::Node Character::encode ( void ) const {
     YAML::Node node;
+    node["type"] = this->CharacterType;
     node["id"] = YAML::Binary ( this->data,sizeof ( uint8_t ) *16 );
     YAML::Node traits = node["basic_traits"];
     std::for_each ( this->CharacterTraits.begin(),this->CharacterTraits.end(),[&] ( const BasicTrait& trait ) -> void { traits.push_back ( trait );} );
@@ -164,13 +165,21 @@ YAML::Node Character::encode ( void ) const {
 
 
 bool Character::decode (const YAML::Node& node ) {
+    if(!node["type"]) {
+      throw(std::runtime_error("Could not decode character. Data invalid - no character type found"));
+    }
+    if(node["type"].as<std::string>() != this->CharacterType) {
+        throw(std::runtime_error("Could not decode character. Expected type: " + this->CharacterType + " but got: " + node["type"].as<std::string>()));
+    }
     std::string id           = node["id"].as<std::string>();
     const YAML::Node  traits = node["basic_traits"];
     if(! traits.IsSequence()) {
      throw(std::runtime_error("Could not decode Character. basic_traits section is supposed to be a sequence")); 
     }
     this->CharacterTraits.clear();
- //   std::copy(traits.begin(), traits.end(), this->CharacterTraits.begin());
+    for(auto i=traits.begin(); i != traits.end(); ++i) {
+        this->CharacterTraits.push_back(i->as<BasicTrait>());
+    }
     auto uuid = YAML::DecodeBase64 ( id.c_str() );
     std::fill ( this->data,this->data+16,static_cast<uint8_t> ( 0 ) );
     std::copy_n ( uuid.begin(),16,static_cast<unsigned char*> ( this->data ) );
