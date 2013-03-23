@@ -26,7 +26,7 @@ class Character : public boost::uuids::uuid {
         Character ( void );
         Character ( const std::string& type );
         virtual ~Character ( void );
-//			virtual const std::string& getCharacterType(void) const = 0;
+        //virtual const std::string& getCharacterType(void) const = 0;
         virtual const std::vector<BasicTrait>& getTraits() const;
         virtual std::tuple<bool,std::string> setValue ( const BasicTrait& trait, const std::string& value );
         virtual std::tuple<bool,std::string> setAttribute ( const BasicTrait& trait, const Attribute& attribute, const std::string& value );
@@ -117,7 +117,7 @@ std::tuple<bool,std::string> Character::check ( CheckFunctor functor ) const {
 namespace YAML {
 template<>
 struct convert<schizophrenia::Character> {
-    static Node encode ( const schizophrenia::Character& character) {
+    static Node encode ( const schizophrenia::Character& character ) {
         return character.encode();
         }
 
