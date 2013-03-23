@@ -12,7 +12,7 @@
 #include<character/Character.hpp>
 
 namespace schizophrenia {
-
+namespace wod {
 
 class PowerStatCheck: public schizophrenia::Check<Character> {
 public:
@@ -21,8 +21,8 @@ public:
 
 	virtual std::tuple<Check<Character>::Result,std::string> operator()(const BasicTrait& trait, Action action);
 	virtual std::tuple<Check<Character>::Result,std::string> operator()(const BasicTrait& trait, const std::string& value);
-	virtual std::tuple<Check<Character>::Result,std::string> operator()(const BasicTrait& trait, const Attribute& attribute, Action action);
-	virtual std::tuple<Check<Character>::Result,std::string> operator()(const BasicTrait& trait, const Attribute& attribute, const std::string& value);
+	virtual std::tuple<Check<Character>::Result,std::string> operator()(const BasicTrait& trait, const schizophrenia::Attribute& attribute, Action action);
+	virtual std::tuple<Check<Character>::Result,std::string> operator()(const BasicTrait& trait, const schizophrenia::Attribute& attribute, const std::string& value);
 
 protected:
 	unsigned short 	PowerStatValue;
@@ -33,6 +33,6 @@ protected:
 
 
 };
-
+}
 } /* namespace schizohrenia */
 #endif /* POWERSTATCHECK_HPP_ */
