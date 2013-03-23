@@ -2,7 +2,7 @@
 #include<character/wod/Merit.hpp>
 
 namespace schizophrenia {
-
+namespace wod {
 std::vector<Merit> Merit::Prototypes {100};
 
 
@@ -82,5 +82,5 @@ bool Merit::decode(const YAML::Node& node) {
 }
 
 
-
+}
 }
