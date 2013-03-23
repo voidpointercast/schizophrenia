@@ -8,7 +8,7 @@
 #include<character/wod/checks/PowerStatCheck.hpp>
 
 namespace schizophrenia {
-
+namespace wod {
 PowerStatCheck::PowerStatCheck(const Character& character)
 : Check(character) {
 	this->PowerStatCount = character.countTrait("powerstat");
@@ -88,7 +88,7 @@ bool PowerStatCheck::checkTraitBounds(const BasicTrait& trait) const {
 	}
 	return traitValue <= std::max(static_cast<unsigned short>(5),this->PowerStatValue);
 }
-
+}
 
 } /* namespace schizohrenia */
 
