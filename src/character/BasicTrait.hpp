@@ -39,10 +39,10 @@ struct BasicTrait {
 
         void save ( std::ostream& out ) const;
 
-        std::string                                     Value;
+        std::string             Value;
         std::vector<Attribute>  Attributes;
-        std::string                             Name;
-        std::string                                     ID;
+        std::string             Name;
+        std::string             ID;
     };
 
 template<class Archive>
