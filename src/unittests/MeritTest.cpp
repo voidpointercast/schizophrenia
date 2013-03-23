@@ -3,8 +3,8 @@
 
 int main(void) {
   unittest::beginTest("Bidirectional Merit to YAML conversion test");
-  schizophrenia::Merit merit;
-  schizophrenia::Merit copy;
+  schizophrenia::wod::Merit merit;
+  schizophrenia::wod::Merit copy;
   merit.Value = 5;
   try {
     copy.decode(merit.encode());
