@@ -13,6 +13,7 @@ namespace schizophrenia {
 
 struct BasicTrait {
     public:
+        typedef std::string ValueType;
         BasicTrait ( const std::string& name, const std::string& value );
         BasicTrait ( const std::string& id, const std::string& name, const std::string& value );
         template<class InputIterator>
@@ -38,10 +39,10 @@ struct BasicTrait {
 
         void save ( std::ostream& out ) const;
 
-        std::string					Value;
-        std::vector<Attribute>	Attributes;
-        std::string 				Name;
-        std::string					ID;
+        std::string                                     Value;
+        std::vector<Attribute>  Attributes;
+        std::string                             Name;
+        std::string                                     ID;
     };
 
 template<class Archive>
