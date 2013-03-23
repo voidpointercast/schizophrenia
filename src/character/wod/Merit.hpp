@@ -4,7 +4,7 @@
 #include<character/BasicTrait.hpp>
 
 namespace schizophrenia {
-
+namespace wod {
 class Merit : public BasicTrait {
     public:
         typedef std::string    IDType;
@@ -44,18 +44,17 @@ class Merit : public BasicTrait {
     };
 
 }
-
+}
 namespace YAML {
 template<>
-struct convert<schizophrenia::Merit> {
-    static Node encode ( const schizophrenia::Merit& merit ) {
+struct convert<schizophrenia::wod::Merit> {
+    static Node encode ( const schizophrenia::wod::Merit& merit ) {
         return merit.encode();
         }
 
-    static bool decode ( const Node& node, schizophrenia::Merit& merit ) {
+    static bool decode ( const Node& node, schizophrenia::wod::Merit& merit ) {
         return merit.decode ( node );
         }
     };
 }
-
 #endif
