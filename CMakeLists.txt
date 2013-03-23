@@ -6,7 +6,7 @@ SET(LIBRARY_OUTPUT_PATH "./lib/")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x -pthread -Wall -Wextra -Wno-unused-parameter -pedantic -O3 -Werror")
 
 add_library(schizophrenia SHARED "src/character/Character.cpp" "src/character/Attribute.cpp" "src/character/BasicTrait.cpp")
-add_library(schizophrenia-wod SHARED "src/character/wod/WorldOfDarknessCharacter.cpp" "src/character/wod/checks/PowerStatCheck.cpp" "src/character/wod/Merit.cpp")
+add_library(schizophrenia-wod SHARED "src/character/wod/WorldOfDarknessCharacter.cpp" "src/character/wod/checks/PowerStatCheck.cpp" "src/character/wod/Merit.cpp" "src/character/wod/Skill.cpp")
 
 target_link_libraries(schizophrenia-wod schizophrenia)
 target_link_libraries(schizophrenia yaml-cpp)
