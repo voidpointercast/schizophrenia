@@ -15,6 +15,16 @@ Attribute::Attribute ( const std::string& name, const std::string& value )
 
     }
 
+Attribute::Attribute ( const std::string& name, const std::string& value, const std::string& category )
+    :
+    Name ( name ),
+    Value ( value ),
+    Category ( category ) {
+
+    }
+
+
+
 Attribute::Attribute ( const YAML::Node& node ) {
     this->decode ( node );
     }
@@ -25,6 +35,17 @@ Attribute::Attribute ( const YAML::Node& node ) {
 Attribute::~Attribute() {
     // TODO Auto-generated destructor stub
     }
+
+
+Attribute::KeywordIterator Attribute::begin ( void ) {
+    return this->Keywords.begin();
+    }
+
+Attribute::KeywordIterator Attribute::end ( void ) {
+    return this->Keywords.end();
+    }
+
+
 
 bool Attribute::operator< ( const Attribute& right ) const {
     return this->Name < right.Name;
