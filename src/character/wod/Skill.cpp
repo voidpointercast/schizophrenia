@@ -3,9 +3,22 @@
 namespace schizophrenia {
 namespace wod {
   
-Skill::Skill ( const std::string& name, Skill::ValueType value ) : BasicTrait(name, boost::lexical_cast<std::string>(value)) {
+Skill::Skill ( const std::string& name, Skill::ValueType value ) 
+: BasicTrait(name, boost::lexical_cast<std::string>(value)) {
 
     }
+    
+Skill::Skill( const std::string& id, const std::string& name, const ValueType& value )
+: BasicTrait(id,name,boost::lexical_cast<std::string>(value)) {
+  
+}
+    
+Skill::Skill( const std::string& id, const std::string& name, const ValueType& value, const std::string& category)
+: BasicTrait(id,name,boost::lexical_cast<std::string>(value), category) {
+  
+}
+
+    
   
   
 Skill::ConstSpecializationIterator Skill::begin ( void ) const {
