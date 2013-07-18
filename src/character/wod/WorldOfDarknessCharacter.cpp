@@ -13,8 +13,8 @@ namespace schizophrenia {
 namespace wod {
 WorldOfDarknessCharacter::WorldOfDarknessCharacter ( void )
     : Character ( "whitewolf.nwod.vampire" ) {
-    std::shared_ptr<Check<Character>> powercheck ( new PowerStatCheck ( *this ) );
-    this->CharacterChecks.push_back ( powercheck );
+/*    std::shared_ptr<Check<Character>> powercheck ( new PowerStatCheck ( *this ) );
+    this->CharacterChecks.push_back ( powercheck );*/
 
 
 
@@ -48,6 +48,25 @@ WorldOfDarknessCharacter::ConstSkillIterator WorldOfDarknessCharacter::endSkills
     return this->Skills.end();
     }
 
+WorldOfDarknessCharacter::ConstCharacteristicIterator WorldOfDarknessCharacter::beginCharacteristics ( void ) const {
+    return this->Characteristics.begin();
+    }
+    
+WorldOfDarknessCharacter::ConstCharacteristicIterator WorldOfDarknessCharacter::endCharacteristics ( void ) const {
+    return this->Characteristics.end();
+    }
+
+WorldOfDarknessCharacter::ConstPowerIterator WorldOfDarknessCharacter::beginPowers ( void ) const {
+    return this->Powers.begin();
+    }
+    
+WorldOfDarknessCharacter::ConstPowerIterator WorldOfDarknessCharacter::endPowers ( void ) const {
+    return this->Powers.end();
+    }
+        
+    
+    
+  
 void WorldOfDarknessCharacter::addMerit ( const Merit& merit ) {
     auto check = this->addTraitCheck ( merit );
     if ( ! std::get<0> ( check ) ) {
@@ -72,7 +91,25 @@ void WorldOfDarknessCharacter::addAttribute ( const wod::Attribute& attribute ) 
     this->Attributes.push_back ( attribute );
     }
 
+void WorldOfDarknessCharacter::addCharacteristic ( const Characteristic& c ) {
+    auto check = this->addTraitCheck(c);
+    if( ! std::get<0> (check)) {
+        throw (std::runtime_error ("Could not add characteristic to character: " + std::get<1>(check)));
+    }
+    this->Characteristics.push_back(c);
+    }
 
+void WorldOfDarknessCharacter::addPower ( const Power& power ) {
+    auto check = this->addTraitCheck(power);
+    if( ! std::get<0> (check)) {
+        throw (std::runtime_error ("Could not add power to character: " + std::get<1>(check)));
+    }
+    this->Powers.push_back(power);
+    }
+    
+    
+    
+    
 
 YAML::Node WorldOfDarknessCharacter::encode ( void ) const {
     YAML::Node node = Character::encode();
@@ -82,6 +119,8 @@ YAML::Node WorldOfDarknessCharacter::encode ( void ) const {
     std::for_each ( this->Merits.begin(),     this->Merits.end(),    [&] ( const wod::Merit& merit )->   void { merits.push_back ( merit );} );
     YAML::Node attributes = node["attributes"];
     std::for_each ( this->Attributes.begin(), this->Attributes.end(),[&] ( const wod::Attribute& attr )->void { attributes.push_back ( attr );} );
+    YAML::Node info = node["characteristics"];
+    std::for_each ( this->Characteristics.begin(), this->Characteristics.end(),[&] ( const wod::Characteristic& c )->void { info.push_back (c );} );
     return node;
     }
 
@@ -90,6 +129,7 @@ bool WorldOfDarknessCharacter::decode ( const YAML::Node& node ) {
     const YAML::Node skills =     node["skills"];
     const YAML::Node merits =     node["merits"];
     const YAML::Node attributes = node["attributes"];
+    const YAML::Node info       = node["characteristics"];
     this->Skills.clear();
     for ( auto i=skills.begin(); i!=skills.end(); ++i ) {
         this->Skills.push_back ( i->as<wod::Skill>() );
@@ -99,9 +139,13 @@ bool WorldOfDarknessCharacter::decode ( const YAML::Node& node ) {
         this->Merits.push_back ( i->as<wod::Merit>() );
         }
     this->Attributes.clear();
-    for ( auto i=attributes.begin(); i!=attributes.end(); i++ ) {
+    for ( auto i=attributes.begin(); i!=attributes.end(); ++i ) {
         this->Attributes.push_back ( i->as<wod::Attribute>() );
         }
+    this->Characteristics.clear();
+    for( auto i=info.begin(); i != info.end(); ++i) {
+        this->Characteristics.push_back(i->as<wod::Characteristic>());
+    }
     return true;
     }
 
@@ -125,7 +169,7 @@ std::tuple<bool,std::string> WorldOfDarknessCharacter::setValue ( const Skill& s
 std::tuple<bool,std::string> WorldOfDarknessCharacter::setValue ( const Merit& merit, const Merit::ValueType& value ) {
     auto pos = std::find ( this->Merits.begin(), this->Merits.end(),merit );
     if ( pos == this->Merits.end() ) {
-        return std::make_tuple ( false,"Could not set value of skill with id=" + merit.ID + ". Skill not found." );
+        return std::make_tuple ( false,"Could not set value of merit with id=" + merit.ID + ". Merit not found." );
         }
     std::string encValue = boost::lexical_cast<std::string> ( value );
     auto check = this->setValueCheck ( *pos,encValue );
@@ -134,14 +178,14 @@ std::tuple<bool,std::string> WorldOfDarknessCharacter::setValue ( const Merit& m
         return std::make_tuple ( true,"" );
         }
     else {
-        return std::make_tuple ( false,"Could not set value of skill with id=" + merit.ID + ". " + std::get<1> ( check ) );
+        return std::make_tuple ( false,"Could not set value of merit with id=" + merit.ID + ". " + std::get<1> ( check ) );
         }
     }
 
 std::tuple<bool,std::string> WorldOfDarknessCharacter::setValue ( const wod::Attribute& attr, const wod::Attribute::ValueType& value ) {
     auto pos = std::find ( this->Attributes.begin(), this->Attributes.end(),attr );
     if ( pos == this->Attributes.end() ) {
-        return std::make_tuple ( false,"Could not set value of skill with id=" + attr.ID + ". Skill not found." );
+        return std::make_tuple ( false,"Could not set value of attribute with id=" + attr.ID + ". Attribute not found." );
         }
     std::string encValue = boost::lexical_cast<std::string> ( value );
     auto check = this->setValueCheck ( *pos,encValue );
@@ -150,12 +194,29 @@ std::tuple<bool,std::string> WorldOfDarknessCharacter::setValue ( const wod::Att
         return std::make_tuple ( true,"" );
         }
     else {
-        return std::make_tuple ( false,"Could not set value of skill with id=" + attr.ID + ". " + std::get<1> ( check ) );
+        return std::make_tuple ( false,"Could not set value of attribute with id=" + attr.ID + ". " + std::get<1> ( check ) );
         }
     }
 
+std::tuple<bool,std::string> WorldOfDarknessCharacter::setValue ( const wod::Characteristic& c, const wod::Characteristic::ValueType& value ) {
+    auto pos = std::find ( this->Characteristics.begin(), this->Characteristics.end(),c );
+    if ( pos == this->Characteristics.end() ) {
+        return std::make_tuple ( false,"Could not set value of characteristic with id=" + c.ID + ". Characteristic not found." );
+        }
+    std::string encValue = boost::lexical_cast<std::string> ( value );
+    auto check = this->setValueCheck ( *pos,encValue );
+    if ( std::get<0> ( check ) ) {
+        pos->Value = encValue;
+        return std::make_tuple ( true,"" );
+        }
+    else {
+        return std::make_tuple ( false,"Could not set value of characteristic with id=" + c.ID + ". " + std::get<1> ( check ) );
+        }
+    }
 
+    
 
+//SPECIALISATIONS
 
 
 
