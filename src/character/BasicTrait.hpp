@@ -16,6 +16,7 @@ struct BasicTrait {
         typedef std::string ValueType;
         BasicTrait ( const std::string& name, const std::string& value );
         BasicTrait ( const std::string& id, const std::string& name, const std::string& value );
+        BasicTrait ( const std::string& id, const std::string& name, const std::string& value , const std::string& category);
         template<class InputIterator>
         BasicTrait ( const std::string& name, const std::string& value, InputIterator begin, InputIterator end );
         template<class InputIterator>
@@ -43,6 +44,7 @@ struct BasicTrait {
         std::vector<Attribute>  Attributes;
         std::string             Name;
         std::string             ID;
+        std::string             Category;
     };
 
 template<class Archive>
@@ -55,13 +57,13 @@ void BasicTrait::serialize ( Archive& archive, const unsigned int version ) {
 
 template<class InputIterator>
 BasicTrait::BasicTrait ( const std::string& name, const std::string& value, InputIterator begin, InputIterator end )
-    : ID ( name ), Name ( name ), Value ( value ), Attributes ( begin,end ) {
+    :  Value ( value ), Attributes ( begin,end ),Name ( name ),  ID ( name ) {
 
     }
 
 template<class InputIterator>
 BasicTrait::BasicTrait ( const std::string& id, const std::string& name, const std::string& value, InputIterator begin, InputIterator end )
-    : ID ( id ), Name ( name ), Value ( value ), Attributes ( begin,end ) {
+    : Value ( value ), Attributes ( begin,end ), Name ( name ),ID ( id )  {
     }
 
 template<class ReturnType>
