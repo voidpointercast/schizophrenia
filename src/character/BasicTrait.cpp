@@ -15,6 +15,11 @@ BasicTrait::BasicTrait ( const std::string& id, const std::string& name, const s
 
     }
 
+BasicTrait::BasicTrait(const std::string& id, const std::string& name, const std::string& value, const std::string& category)
+    : Value(value), Attributes(0), Name(name), ID(id), Category(category) {
+      
+    }
+    
 BasicTrait::~BasicTrait ( void ) {
 
     }
@@ -51,8 +56,8 @@ YAML::Node BasicTrait::encode ( void ) const {
     node["name"]  = this->Name;
     node["value"] = this->Value;
     YAML::Node attributes = node["attributes"];
-    std::for_each ( this->Attributes.begin(),this->Attributes.end(),[&] ( const Attribute& attr ) -> void { attributes.push_back ( attr ); } );
-    return node;
+    std::for_each ( this->Attributes.begin(),this->Attributes.end(),[&] ( const Attribute& attr ) -> void { attributes.push_back<Attribute> ( attr ); } );
+     return node;
     }
 
 bool BasicTrait::decode ( const YAML::Node& node ) {
