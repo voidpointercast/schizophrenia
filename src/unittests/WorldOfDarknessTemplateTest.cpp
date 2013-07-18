@@ -11,11 +11,11 @@ int main ( void ) {
     WorldOfDarknessCharacter testchar;
     endTest ( true );
     beginTest ( "WorldOfDarknessCharacter add Trait test" );
-    testchar.addTrait ( BasicTrait ( "Strength","5" ) );
-    auto trait = testchar.getTraits().back();
+    testchar.addAttribute ( wod::Attribute ( "Strength",5 ) );
+    auto trait = *testchar.beginAttributes();
     endTest ( trait.Value == "5" && trait.Name == "Strength" );
     beginTest ( "PowerStatCheck raise value reject test" );
-    endTest ( ! std::get<0> ( static_cast<Character>(testchar).setValue ( trait,"6" ) ) );
+    endTest ( ! std::get<0> ( testchar.setValueByID<wod::Attribute>( "Strength",6 ) ) );
     beginTest ( "PowerStatCheck add trait reject test" );
     endTest ( ! std::get<0> ( testchar.addTrait ( BasicTrait ( "Dexterity","6" ) ) ) );
     beginTest ( "PowerStatCheck add second powerstat reject test" );
@@ -38,5 +38,13 @@ int main ( void ) {
     else {
         endTest ( search->Value == "4","value mismatch" );
         }
+    beginTest("setValueById on skill test");
+    endTest(std::get<0>(testchar.setValueByID<Skill>("skill",3)) && search->Value == "3");
+    beginTest("Bidirectional YAML to WorldOfDarknessCharacter test");
+    WorldOfDarknessCharacter copy;
+    std::cerr << copy.encode() << std::endl;
+    std::cerr << "decoding\n";
+    copy.decode(testchar.encode());
+    endTest(copy == testchar);
     return 0;
     }
