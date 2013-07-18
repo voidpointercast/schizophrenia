@@ -12,6 +12,15 @@ namespace wod {
     typedef boost::filter_iterator<std::function<bool ( Attribute ) >,typename std::vector<Attribute>::iterator>       SpecializationIterator;
     
     Skill(const std::string& name, ValueType value);
+    Skill( const std::string& id, const std::string& name, const ValueType& value );
+    Skill( const std::string& id, const std::string& name, const ValueType& value, const std::string& category );
+    template<class InputIterator>
+    Skill ( const std::string& name, const ValueType& value, InputIterator begin, InputIterator end );
+    template<class InputIterator>
+    Skill( const std::string& id, const std::string& name, const ValueType& value, InputIterator begin, InputIterator end );
+
+    
+    
     Skill(void)  = default;
     ~Skill(void) = default;
   
@@ -21,6 +30,24 @@ namespace wod {
     SpecializationIterator begin(void);
     SpecializationIterator end(void);
   };
+  
+  
+template<class InputIterator>
+Skill::Skill ( const std::string& name, const ValueType& value, InputIterator begin, InputIterator end ) 
+: BasicTrait(name,boost::lexical_cast<std::string>(value),begin,end) {
+  
+}
+
+template<class InputIterator>
+Skill::Skill( const std::string& id, const std::string& name, const ValueType& value, InputIterator begin, InputIterator end )
+: BasicTrait(id,name,boost::lexical_cast<std::string>(value),begin,end) {
+  
+}
+
+  
+  
+  
+  
   
 }
 }
