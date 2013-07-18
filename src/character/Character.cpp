@@ -171,9 +171,12 @@ bool Character::decode (const YAML::Node& node ) {
     if(node["type"].as<std::string>() != this->CharacterType) {
         throw(std::runtime_error("Could not decode character. Expected type: " + this->CharacterType + " but got: " + node["type"].as<std::string>()));
     }
+    if(!node["id"]) {
+        throw(std::runtime_error("Could not decode character. Character ID missing"));
+    }
     std::string id           = node["id"].as<std::string>();
     const YAML::Node  traits = node["basic_traits"];
-    if(! traits.IsSequence()) {
+    if(! traits.IsSequence() && traits.IsDefined()) {
      throw(std::runtime_error("Could not decode Character. basic_traits section is supposed to be a sequence")); 
     }
     this->CharacterTraits.clear();
