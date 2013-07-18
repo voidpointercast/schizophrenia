@@ -16,6 +16,7 @@ namespace schizophrenia {
 
 class Attribute {
     public:
+        typedef typename std::vector<std::string>::iterator KeywordIterator;
         Attribute ( const std::string& name, const std::string& value );
         Attribute ( const std::string& name, const std::string& value, const std::string& category );
         Attribute ( const YAML::Node& );
@@ -31,6 +32,9 @@ class Attribute {
 
         bool decode ( const YAML::Node& );
 
+        KeywordIterator begin(void);
+        KeywordIterator end(void);
+        
         template<typename ReturnType=std::string>
         ReturnType getValue ( void ) const;
 
@@ -47,6 +51,7 @@ class Attribute {
     protected:
         std::string Value;
         std::string Category;
+    public:
         std::vector<std::string> Keywords;
 
     };
