@@ -9,8 +9,9 @@ class Merit : public BasicTrait {
     public:
         typedef std::string    IDType;
         typedef unsigned short ValueType;
+        typedef unsigned int   RangeType;
         typedef boost::filter_iterator<std::function<bool ( Attribute ) >,typename std::vector<Attribute>::const_iterator> PrequisiteIterator;
-        typedef typename std::vector<std::tuple<ValueType,std::string>>::const_iterator PossibleValueIterator;
+        typedef typename std::vector<RangeType>::const_iterator PossibleValueIterator;
 
         static Merit createMerit ( const IDType& id, ValueType value, const std::string& description = "" );
 
@@ -36,6 +37,7 @@ class Merit : public BasicTrait {
         std::string Type;
         std::string Book;
         std::string Page;
+        bool        Multiple;
 
 
     protected:
@@ -46,7 +48,7 @@ class Merit : public BasicTrait {
     private:
         static std::vector<Merit> Prototypes;
         std::vector<std::string> Keywords;
-        std::vector<std::tuple<ValueType, std::string>> PossibleValues;
+        std::vector<unsigned int> PossibleValues;
     };
 
     template<class OutputIterator>
