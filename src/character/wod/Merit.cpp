@@ -54,28 +54,27 @@ YAML::Node Merit::encode(void) const {
   node["type"] = this->Type;
   node["book"] = this->Book;
   node["page"] = this->Page;
-  YAML::Node possibleValues = node["values"];
-  for(const std::tuple<ValueType,std::string>& val : this->PossibleValues) {
-      YAML::Node entry;
-      entry["value"]       = std::get<0>(val);
-      entry["description"] = std::get<1>(val);
-      possibleValues.push_back(entry);
+  node["mult"] = this->Multiple;
+  YAML::Node possibleValues = node["range"];
+  for(const unsigned int& val : this->PossibleValues) {
+      possibleValues.push_back(val);
   }
   return node; 
 }
 
 bool Merit::decode(const YAML::Node& node) {
-  static_cast<BasicTrait*>(this)->decode(node);
-  this->Type = node["type"].as<std::string>();
-  this->Book = node["book"].as<std::string>();
-  this->Page = node["page"].as<std::string>();
+  BasicTrait::decode(node);
+  this->Type     = node["type"].as<std::string>();
+  this->Book     = node["book"].as<std::string>();
+  this->Page     = node["page"].as<std::string>();
+  this->Multiple = node["mult"].as<bool>();
   this->PossibleValues.clear();
-  YAML::Node possibleValues = node["values"];
-  auto end = possibleValues.end();
+  YAML::Node possibleValues = node["range"];
   if(possibleValues.IsSequence()) {
+    auto end = possibleValues.end();
     for(auto it = possibleValues.begin(); it != end; ++it) {
         const YAML::Node entry = *it;
-         this->PossibleValues.push_back(std::make_tuple(entry["value"].as<ValueType>(),entry["description"].as<std::string>()));
+         this->PossibleValues.push_back(entry.as<unsigned int>());
     }
   }
   return true;
