@@ -43,17 +43,14 @@ bool Merit::operator== ( const Merit& right ) const {
 
 Merit::Merit ( const Merit::IDType& id, const std::string& name, const std::string& type, const std::string& book, const std::string& page )
     : BasicTrait ( id, name, "" ),
-      Type ( type ),
-      Book ( book ),
-      Page ( page ) {
-
+      Type ( type ) {
+        this->Book = book;
+        this->Page = page;
     }
 
 YAML::Node Merit::encode(void) const {
   YAML::Node node = static_cast<const BasicTrait*>(this)->encode();
   node["type"] = this->Type;
-  node["book"] = this->Book;
-  node["page"] = this->Page;
   node["mult"] = this->Multiple;
   YAML::Node possibleValues = node["range"];
   for(const unsigned int& val : this->PossibleValues) {
@@ -65,8 +62,6 @@ YAML::Node Merit::encode(void) const {
 bool Merit::decode(const YAML::Node& node) {
   BasicTrait::decode(node);
   this->Type     = node["type"].as<std::string>();
-  this->Book     = node["book"].as<std::string>();
-  this->Page     = node["page"].as<std::string>();
   this->Multiple = node["mult"].as<bool>();
   this->PossibleValues.clear();
   YAML::Node possibleValues = node["range"];
