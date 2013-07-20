@@ -55,6 +55,8 @@ YAML::Node BasicTrait::encode ( void ) const {
     node["id"]    = this->ID;
     node["name"]  = this->Name;
     node["value"] = this->Value;
+    node["book"]  = this->Book;
+    node["page"]  = this->Page;
     YAML::Node attributes = node["attributes"];
     std::for_each ( this->Attributes.begin(),this->Attributes.end(),[&] ( const Attribute& attr ) -> void { attributes.push_back<Attribute> ( attr ); } );
      return node;
@@ -64,6 +66,8 @@ bool BasicTrait::decode ( const YAML::Node& node ) {
     this->ID   = node["id"].as<std::string>();
     this->Name = node["name"].as<std::string>();
     this->Value= node["value"].as<std::string>();
+    this->Book = node["book"].as<std::string>();
+    this->Page = node["page"].as<unsigned short>();
     const YAML::Node attributes = node["attributes"];
     this->Attributes.clear();
     if ( attributes.IsSequence() ) {
