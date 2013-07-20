@@ -67,7 +67,7 @@ bool BasicTrait::decode ( const YAML::Node& node ) {
     this->Name = node["name"].as<std::string>();
     this->Value= node["value"].as<std::string>();
     this->Book = node["book"].as<std::string>();
-    this->Page = node["page"].as<unsigned short>();
+    this->Page = node["page"].as<std::string>();
     const YAML::Node attributes = node["attributes"];
     this->Attributes.clear();
     if ( attributes.IsSequence() ) {
