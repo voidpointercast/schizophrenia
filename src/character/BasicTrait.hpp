@@ -45,6 +45,8 @@ struct BasicTrait {
         std::string             Name;
         std::string             ID;
         std::string             Category;
+        std::string             Book;
+        unsigned short          Page;
     };
 
 template<class Archive>
