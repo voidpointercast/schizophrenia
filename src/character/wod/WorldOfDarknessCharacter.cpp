@@ -56,16 +56,6 @@ WorldOfDarknessCharacter::ConstCharacteristicIterator WorldOfDarknessCharacter::
     return this->Characteristics.end();
     }
 
-WorldOfDarknessCharacter::ConstPowerIterator WorldOfDarknessCharacter::beginPowers ( void ) const {
-    return this->Powers.begin();
-    }
-    
-WorldOfDarknessCharacter::ConstPowerIterator WorldOfDarknessCharacter::endPowers ( void ) const {
-    return this->Powers.end();
-    }
-        
-    
-    
   
 void WorldOfDarknessCharacter::addMerit ( const Merit& merit ) {
     auto check = this->addTraitCheck ( merit );
@@ -99,17 +89,6 @@ void WorldOfDarknessCharacter::addCharacteristic ( const Characteristic& c ) {
     this->Characteristics.push_back(c);
     }
 
-void WorldOfDarknessCharacter::addPower ( const Power& power ) {
-    auto check = this->addTraitCheck(power);
-    if( ! std::get<0> (check)) {
-        throw (std::runtime_error ("Could not add power to character: " + std::get<1>(check)));
-    }
-    this->Powers.push_back(power);
-    }
-    
-    
-    
-    
 
 YAML::Node WorldOfDarknessCharacter::encode ( void ) const {
     YAML::Node node = Character::encode();
