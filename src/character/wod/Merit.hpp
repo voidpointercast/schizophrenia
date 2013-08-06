@@ -35,8 +35,6 @@ class Merit : public BasicTrait {
 
         std::string Description;
         std::string Type;
-        std::string Book;
-        std::string Page;
         bool        Multiple;
 
 
