@@ -12,10 +12,16 @@ add_library(schizophrenia-wod SHARED "src/character/wod/WorldOfDarknessCharacter
 "src/character/wod/Skill.cpp"
 "src/character/wod/Attribute.cpp"
 "src/character/wod/Characteristic.cpp"
+"src/character/wod/Species.cpp"
+"src/character/wod/Advantage.cpp"
 )
+add_library(schizophrenia-lost SHARED "src/character/wod/Changeling/Contract.cpp"
+"src/character/wod/Changeling/ChangelingCharacter.cpp")
+
 
 target_link_libraries(schizophrenia-wod schizophrenia)
 target_link_libraries(schizophrenia yaml-cpp)
+target_link_libraries(schizophrenia-lost schizophrenia-wod)
 
 add_executable(WODTemplateTest "src/unittests/WorldOfDarknessTemplateTest.cpp")
 add_executable(BasicTraitYamlTest "src/unittests/BasicTraitYamlTest.cpp")
@@ -29,3 +35,5 @@ target_link_libraries(CharacterTest yaml-cpp schizophrenia)
 target_link_libraries(MeritTest yaml-cpp schizophrenia-wod)
 target_link_libraries(TemplateGenerator yaml-cpp schizophrenia schizophrenia-wod)
 
+
+add_subdirectory(src/character/wod/Changeling)
