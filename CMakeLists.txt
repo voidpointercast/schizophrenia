@@ -27,6 +27,7 @@ add_executable(WODTemplateTest "src/unittests/WorldOfDarknessTemplateTest.cpp")
 add_executable(BasicTraitYamlTest "src/unittests/BasicTraitYamlTest.cpp")
 add_executable(CharacterTest "src/unittests/CharacterTest.cpp")
 add_executable(MeritTest "src/unittests/MeritTest.cpp")
+add_executable(SpeciesTest "src/unittests/Species.cpp")
 add_executable(TemplateGenerator "src/unittests/WODTemplateGenerator.cpp")
 
 target_link_libraries(WODTemplateTest yaml-cpp schizophrenia-wod)
@@ -34,6 +35,7 @@ target_link_libraries(BasicTraitYamlTest yaml-cpp schizophrenia)
 target_link_libraries(CharacterTest yaml-cpp schizophrenia)
 target_link_libraries(MeritTest yaml-cpp schizophrenia-wod)
 target_link_libraries(TemplateGenerator yaml-cpp schizophrenia schizophrenia-wod)
+target_link_libraries(SpeciesTest schizophrenia-wod)
 
 
 add_subdirectory(src/character/wod/Changeling)
