@@ -42,8 +42,6 @@ int main ( void ) {
     endTest(std::get<0>(testchar.setValueByID<Skill>("skill",3)) && search->Value == "3");
     beginTest("Bidirectional YAML to WorldOfDarknessCharacter test");
     WorldOfDarknessCharacter copy;
-    std::cerr << copy.encode() << std::endl;
-    std::cerr << "decoding\n";
     copy.decode(testchar.encode());
     endTest(copy == testchar);
     return 0;
