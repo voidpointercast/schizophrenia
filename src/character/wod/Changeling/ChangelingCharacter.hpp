@@ -2,6 +2,7 @@
 #define SCHIZOPHRENIA_CHARACTER_WOD_CHANGELING_CHANGELING_HPP
 #include<character/wod/WorldOfDarknessCharacter.hpp>
 #include<character/wod/Changeling/Contract.hpp>
+#include<character/wod/Changeling/Kith.hpp>
 namespace schizophrenia {
 namespace wod {
 namespace lost {
@@ -14,6 +15,8 @@ public:
 
 
     void addContract(const Contract& contract);
+    
+    std::tuple<bool, std::string> addSeeming(const Kith& seeming);
 
     std::tuple<bool,std::string> setValue(const Contract& contract, const typename Contract::ValueType& value);
 
@@ -29,6 +32,8 @@ public:
 
 protected:
     std::vector<Contract> Contracts;
+    Kith                  Seeming;
+    
 
 
 };
