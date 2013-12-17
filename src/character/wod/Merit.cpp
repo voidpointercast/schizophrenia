@@ -6,6 +6,13 @@ namespace wod {
 std::vector<Merit> Merit::Prototypes {100};
 
 
+Merit::Merit ( const Merit::IDType& id, const std::string name ) : BasicTrait(id,name) {
+
+}
+
+
+
+
 Merit Merit::createMerit ( const Merit::IDType& id, Merit::ValueType value, const std::string& description ) {
     auto pos = std::find_if ( Merit::Prototypes.begin(), Merit::Prototypes.end(), [&] ( const Merit& m ) -> bool { return m.ID == id; } );
     if ( pos == Merit::Prototypes.end() ) {
@@ -35,6 +42,8 @@ Merit::PossibleValueIterator Merit::endValues ( void ) const {
     }
 
 
+    
+    
 
 bool Merit::operator== ( const Merit& right ) const {
     return ( this->Description == right.Description && *static_cast<const BasicTrait*> ( this ) == static_cast<const BasicTrait> ( right ) );

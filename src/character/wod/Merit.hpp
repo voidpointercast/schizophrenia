@@ -15,6 +15,9 @@ class Merit : public BasicTrait {
 
         static Merit createMerit ( const IDType& id, ValueType value, const std::string& description = "" );
 
+	Merit(const IDType& id, const std::string name);
+	
+	
         template<class OutputIterator>
         static void loadFromFile(const std::string& filename, OutputIterator out);
         
