@@ -12,6 +12,8 @@ public:
     typedef std::vector<Contract>::const_iterator ConstContractIterator;
 
     ChangelingCharacter(void) = default;
+    
+    ChangelingCharacter(const YAML::Node& node);
 
 
     void addContract(const Contract& contract);
