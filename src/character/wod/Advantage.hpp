@@ -7,7 +7,7 @@ namespace wod {
 
 class Advantage : public BasicTrait {
 public:
-
+   typedef unsigned short ValueType;
     static const std::string Category;
 
     Advantage ( void ) = default;
