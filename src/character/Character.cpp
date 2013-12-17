@@ -29,6 +29,12 @@ Character::~Character ( void ) {
 
     }
 
+const std::string& Character::getID(void ) const
+{
+  return this->ID;
+  
+}
+
 
 std::string Character::getUUID ( void ) const {
     std::stringstream converter;

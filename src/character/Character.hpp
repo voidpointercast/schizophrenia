@@ -53,6 +53,8 @@ class Character : public boost::uuids::uuid {
 
         void addCheck ( const std::shared_ptr<Check<Character>>& check );
         void removeCheck ( typename std::vector<std::shared_ptr<Check<Character>>>::iterator position );
+	
+	const std::string& getID(void) const;
 
         const std::string CharacterType;
 
