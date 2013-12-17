@@ -25,6 +25,7 @@ class WorldOfDarknessCharacter: public schizophrenia::Character {
         typedef typename std::vector<wod::Skill>::const_iterator                ConstSkillIterator;
         typedef typename std::vector<schizophrenia::BasicTrait>::const_iterator BasicTraitIterator;
         typedef typename std::vector<wod::Characteristic>::const_iterator       ConstCharacteristicIterator;
+	typedef typename std::vector<wod::Advantage>::const_iterator		ConstAdvantageIterator;
 
 
         WorldOfDarknessCharacter ( void );
@@ -34,11 +35,13 @@ class WorldOfDarknessCharacter: public schizophrenia::Character {
         void addAttribute ( const wod::Attribute& attribute );
         void addSkill ( const wod::Skill& skill );
         void addCharacteristic( const wod::Characteristic& c);
+	void addAdvantage(const wod::Advantage& adv);
 
         std::tuple<bool,std::string> setValue ( const Skill& skill,           const typename Skill::ValueType& value );
         std::tuple<bool,std::string> setValue ( const Merit& skill,           const typename Merit::ValueType& value );
         std::tuple<bool,std::string> setValue ( const wod::Attribute& skill,  const typename wod::Attribute::ValueType& value );
         std::tuple<bool,std::string> setValue ( const wod::Characteristic& c, const typename wod::Characteristic::ValueType& value);
+	std::tuple<bool,std::string> setValue ( const wod::Advantage& adv,    const typename wod::Advantage::ValueType& value);
 
         template<class TraitType>
         std::tuple<bool,std::string> setValueByID ( const std::string& id, const typename TraitType::ValueType& value );
@@ -54,6 +57,8 @@ class WorldOfDarknessCharacter: public schizophrenia::Character {
         ConstSkillIterator     endSkills ( void ) const;
         ConstCharacteristicIterator beginCharacteristics (void) const;
         ConstCharacteristicIterator endCharacteristics (void) const;
+	ConstAdvantageIterator beginAdvantages(void) const;
+	ConstAdvantageIterator endAdvantages(void) const;
 
         template<class Category>
         typename std::vector<Category>::const_iterator beginCategory() const;
@@ -75,6 +80,7 @@ class WorldOfDarknessCharacter: public schizophrenia::Character {
         std::vector<wod::Merit>          Merits;
         std::vector<wod::Skill>          Skills;
         std::vector<wod::Characteristic> Characteristics;
+	std::vector<wod::Advantage>      Advantages;
 
     };
 
@@ -123,6 +129,10 @@ inline std::tuple<bool,std::string> WorldOfDarknessCharacter::setValueByID<wod::
     return this->setGenericValue ( id,this->Characteristics,value );
     }
 
+template<>
+inline std::tuple<bool,std::string> WorldOfDarknessCharacter::setValueByID<wod::Advantage> ( const std::string& id, const wod::Advantage::ValueType& value ) {
+    return this->setGenericValue ( id,this->Advantages,value );
+    }
    
     
 
